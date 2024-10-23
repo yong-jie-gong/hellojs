@@ -11,7 +11,7 @@
     "dependencies": {
         "cors": "^2.8.5",
         "jquery": "^3.6.1"
-        "express": "^4.21.1",
+        "express": "^4.21.1"
     },
     "author": "",
     "license": "ISC"
