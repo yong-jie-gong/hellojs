@@ -1,0 +1,53 @@
+name: NodeJS with Webpack
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  issue_comment:
+    types: [created, edited, deleted]
+
+jobs:
+  job01:
+    if: contains(github.event.comment.html_url, '/pull/') # check if the comments come from pull request, exclude those from issue.
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: say hello
+        if: contains(github.event.comment.body, '/support') # check the comment if it contains the keywords
+        run: |
+          echo say hello support
+      - name: test
+        if: contains(github.event.comment.body, '/test') # check the comment if it contains the keywords
+        run: |
+          echo test
+  ci-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: prepare
+      run: |
+        echo prepare
+    - name: verify code
+      run: |
+        echo verify code
+    - name: finish
+      run: |
+        echo finish
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Build
+        run: |
+          npm install
+          npm install -D webpack-cli
