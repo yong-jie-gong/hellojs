@@ -1,29 +1,22 @@
 var express = require('express');
-var cors=require("cors")
-var app = express(); 
+var cors = require("cors")
+var app = express();
 //middleware
 app.use(express.json());
 app.use(cors({
    origin: ["http://localhost:3001"],
    methods: ["GET", "POST", "PUT", "DELETE"],
    allowedHeaders: ["Content-Type", "Authorization"]
-})) 
-app.use(express.urlencoded({extended:true}));
+}))
+app.use(express.urlencoded({ extended: true }));
 var logger = require('./modules/middlewares/logger');
 app.use(logger)
-app.use('/', express.static('public')); 
- 
+app.use('/', express.static('public'));
+// var photoPath = path.resolve(__dirname, "offensive-photos-folder");
+// app.use("/offensive", express.static(photoPath));
 //RESTful Resources
 var router = require('./modules/resources/router');
 router.register(app)
-
-app.get('/users', function (req, res) {
-   fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
-       console.log( data );
-       res.end( data );
-   });
-})
-
 var server = app.listen(8081, function () {
 
    var host = server.address().address

@@ -4,6 +4,7 @@
     "description": "",
     "main": "app.js",
     "scripts": {
+        "start": "nodemon app.js",
         "test": "echo \"test specified\" && exit 0",
         "serverbin": "nodemon ./bin/index.js",
         "server": "nodemon app.js"

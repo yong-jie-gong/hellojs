@@ -1,12 +1,16 @@
-const topRouterPath ="/api/v1"
+const topRouterPath = "/api/v1"
 var groupRouter = require('./group/group');
 var userRouter = require('./user/user');
+var demo1Router = require('./demo1/demo');
+var demo2Router = require('./demo2/demo');
 
 function Router() {
 }
 Router.prototype.register = function (app) {
-    app.use(topRouterPath+'/groups', groupRouter);
-    app.use(topRouterPath+'/users', userRouter);
+    app.use(topRouterPath + '/groups', groupRouter);
+    app.use(topRouterPath + '/users', userRouter);
+    app.use('/demo1', demo1Router);
+    app.use('/demo2', demo2Router);
 
     app.use(function (req, res) {
         res.send('404 not found');
